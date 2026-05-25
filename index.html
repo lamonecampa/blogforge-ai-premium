@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Force window.fetch to be writable via getter and setter to prevent "Cannot set property fetch of #<Window> which has only a getter"
+      try {
+        (function() {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          
+          var defineFetch = function(obj) {
+            try {
+              Object.defineProperty(obj, 'fetch', {
+                get: function() { return currentFetch; },
+                set: function(val) { currentFetch = val; },
+                configurable: true,
+                enumerable: true
+              });
+              return true;
+            } catch (e) {
+              return false;
+            }
+          };
+
+          if (originalFetch) {
+            if (!defineFetch(window)) {
+              if (typeof Window !== 'undefined' && Window.prototype) {
+                defineFetch(Window.prototype);
+              }
+            }
+            if (typeof globalThis !== 'undefined' && globalThis !== window) {
+              defineFetch(globalThis);
+            }
+          }
+        })();
+      } catch (err) {
+        console.warn("Fetch polyfill failed:", err);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

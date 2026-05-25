@@ -1,0 +1,6 @@
+{
+  "name": "BlogForge AI Premium",
+  "description": "Aplikasi AI untuk menghasilkan artikel premium SEO-friendly, mengelola blog Blogspot secara otomatis, dan melakukan auto-posting dengan kualitas konten yang natural, informatif, dan berorientasi pada ranking Google.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
